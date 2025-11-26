@@ -1,4 +1,4 @@
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/SideBar";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 
