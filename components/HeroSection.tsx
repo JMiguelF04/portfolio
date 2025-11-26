@@ -3,31 +3,26 @@
 export default function HeroSection() {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient orbs */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-6 py-20 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-muted border border-accent/20 mb-8">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-sm text-accent font-medium">Disponível para oportunidades</span>
+            <span className="text-sm text-accent font-medium">Disponível para trabalhar</span>
           </div>
           
-          {/* Main Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             Transformo ideias em{" "}
             <span className="gradient-text">experiências digitais</span>
           </h1>
           
-          {/* Subtitle */}
           <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed mb-10 max-w-2xl mx-auto">
-            Estudante de Engenharia Informática apaixonado por desenvolvimento web, 
+            Estudante de Engenharia Informática apaixonado por Inteligência Artificial e com experiência em desenvolvimento web, 
             UX/UI Design e criação de soluções inovadoras com impacto real.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#contacto"
@@ -49,14 +44,13 @@ export default function HeroSection() {
             </a>
           </div>
 
-          {/* Stats */}
           <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50 max-w-lg mx-auto">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-accent mb-1">3+</div>
               <div className="text-sm text-foreground-muted">Anos de Código</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">5+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">3+</div>
               <div className="text-sm text-foreground-muted">Projetos</div>
             </div>
             <div className="text-center">
@@ -66,7 +60,6 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
           <svg className="w-6 h-6 text-foreground-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

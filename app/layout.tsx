@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   description: "Portfolio de Jorge Ferreira - Desenvolvedor Júnior especializado em Next.js, TypeScript, UX/UI Design e desenvolvimento de APIs.",
   keywords: ["Jorge Ferreira", "Developer", "Next.js", "TypeScript", "React", "Portfolio"],
   authors: [{ name: "Jorge Ferreira" }],
+  icons: {
+    icon: "/newfavicon.png",
+  },
   openGraph: {
     title: "Jorge Ferreira | Junior Developer",
     description: "Portfolio de Jorge Ferreira - Desenvolvedor Júnior",

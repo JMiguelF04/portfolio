@@ -7,7 +7,6 @@ export default function Footer() {
     <footer className="py-12 border-t border-border">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="text-xl font-bold text-foreground inline-block mb-2">
               <span className="text-accent">J</span>orge <span className="text-accent">F</span>erreira
@@ -17,7 +16,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div className="flex items-center gap-6">
             <a href="#sobre" className="text-foreground-secondary hover:text-accent transition-colors text-sm">
               Sobre
@@ -33,10 +31,9 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Social Links */}
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/jmferreira0307"
+              href="https://github.com/JMiguelF04"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full border border-border text-foreground-secondary hover:border-accent hover:text-accent transition-all duration-300"
@@ -47,7 +44,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com/in/jorgemferreira"
+              href="https://www.linkedin.com/in/jorge-ferreira-b2a06930b"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full border border-border text-foreground-secondary hover:border-accent hover:text-accent transition-all duration-300"
@@ -69,7 +66,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Made with love */}
         <div className="mt-8 pt-8 border-t border-border/50 text-center">
           <p className="text-foreground-muted text-sm">
             Feito com{" "}
