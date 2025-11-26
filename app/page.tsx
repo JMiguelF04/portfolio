@@ -7,9 +7,7 @@ export default function Home() {
     <div className="min-h-screen bg-background noise-overlay">
       <Sidebar />
       
-      {/* Main Content - offset for sidebar on desktop */}
       <main className="lg:ml-72">
-        {/* Mobile spacer for fixed header */}
         <div className="h-16 lg:hidden" />
         
         <HeroSection />
