@@ -2,6 +2,8 @@ import Sidebar from "@/components/SideBar";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";
 import AboutSection from "@/components/AboutSection";
+import EducationSection from "@/components/EducationSection";
+import SkillsSection from "@/components/SkillsSection";
 
 export default function Home() {
   return (
@@ -11,8 +13,9 @@ export default function Home() {
         <div className="h-16 lg:hidden" />
         
         <HeroSection />
-              <AboutSection />
-
+        <AboutSection />
+        <SkillsSection />
+        <EducationSection />
 
         <Footer />
       </main>
