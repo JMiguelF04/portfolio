@@ -68,9 +68,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border/50 text-center">
           <p className="text-foreground-muted text-sm">
-            Feito com{" "}
-            <span className="text-accent">♥</span>
-            {" "}usando Next.js & Tailwind CSS
+            Feito com Next.js & Tailwind CSS
           </p>
         </div>
       </div>
