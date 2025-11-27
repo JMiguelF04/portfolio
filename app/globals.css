@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark theme - Elegant charcoal with warm amber accents */
   --background: #0c0c0c;
   --background-secondary: #141414;
   --background-tertiary: #1a1a1a;
