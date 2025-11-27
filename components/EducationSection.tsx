@@ -1,21 +1,10 @@
 "use client";
 
-const education = {
-  degree: "Licenciatura em Engenharia Informática",
-  institution: "IADE - Creative University",
-  period: "2023 - Presente",
-  description: "Formação abrangente em ciências da computação com foco prático em desenvolvimento de software.",
-  courses: [
-    "Desenvolvimento web com Next.js e TypeScript",
-    "Competências em UX/UI Design e criação de interfaces funcionais",
-    "Desenvolvimento de aplicações móveis (Android/Kotlin)",
-    "Backend com Java / Spring Boot",
-    "Programação em C e bases sólidas de SQL",
-    "Formação em Sistemas Distribuídos e Algoritmos de IA",
-  ],
-};
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function EducationSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="educacao" className="py-24 bg-background-secondary relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -23,8 +12,8 @@ export default function EducationSection() {
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">Formação</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Educação</h2>
+          <span className="text-accent font-mono text-sm tracking-wider uppercase">{t.education.subtitle}</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">{t.education.title}</h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
         </div>
 
@@ -43,9 +32,9 @@ export default function EducationSection() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-1">{education.degree}</h3>
-                    <p className="text-accent font-medium text-lg">{education.institution}</p>
-                    <p className="text-foreground-muted">{education.description}</p>
+                    <h3 className="text-2xl font-bold text-foreground mb-1">{t.education.degree}</h3>
+                    <p className="text-accent font-medium text-lg">{t.education.institution}</p>
+                    <p className="text-foreground-muted">{t.education.description}</p>
                   </div>
                 </div>
                 
@@ -53,7 +42,7 @@ export default function EducationSection() {
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-accent font-semibold">{education.period}</span>
+                  <span className="text-accent font-semibold">{t.education.period}</span>
                 </div>
               </div>
 
@@ -62,11 +51,11 @@ export default function EducationSection() {
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                   </svg>
-                  Conhecimentos Adquiridos
+                  {t.education.coursesTitle}
                 </h4>
                 
                 <div className="grid md:grid-cols-2 gap-4">
-                  {education.courses.map((course, index) => (
+                  {t.education.courses.map((course, index) => (
                     <div
                       key={index}
                       className="flex items-start gap-3 p-4 rounded-xl bg-background/50 border border-border/50"
@@ -86,4 +75,3 @@ export default function EducationSection() {
     </section>
   );
 }
-

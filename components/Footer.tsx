@@ -1,7 +1,10 @@
 "use client";
 
+import { useLanguage } from "@/lib/LanguageContext";
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="py-12 border-t border-border">
@@ -12,22 +15,22 @@ export default function Footer() {
               <span className="text-accent">J</span>orge <span className="text-accent">F</span>erreira
             </a>
             <p className="text-foreground-muted text-sm">
-              © {currentYear} Jorge Ferreira. Todos os direitos reservados.
+              © {currentYear} Jorge Ferreira. {t.footer.rights}
             </p>
           </div>
 
           <div className="flex items-center gap-6">
             <a href="#sobre" className="text-foreground-secondary hover:text-accent transition-colors text-sm">
-              Sobre
+              {t.nav.about}
             </a>
             <a href="#competencias" className="text-foreground-secondary hover:text-accent transition-colors text-sm">
-              Competências
+              {t.nav.skills}
             </a>
             <a href="#experiencia" className="text-foreground-secondary hover:text-accent transition-colors text-sm">
-              Experiência
+              {t.nav.experience}
             </a>
             <a href="#contacto" className="text-foreground-secondary hover:text-accent transition-colors text-sm">
-              Contacto
+              {t.nav.contact}
             </a>
           </div>
 
@@ -68,11 +71,10 @@ export default function Footer() {
 
         <div className="mt-8 pt-8 border-t border-border/50 text-center">
           <p className="text-foreground-muted text-sm">
-            Feito com Next.js & Tailwind CSS
+            {t.footer.madeWith}
           </p>
         </div>
       </div>
     </footer>
   );
 }
-
