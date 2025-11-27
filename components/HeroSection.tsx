@@ -46,7 +46,7 @@ export default function HeroSection() {
 
           <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50 max-w-lg mx-auto">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">3+</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">2+</div>
               <div className="text-sm text-foreground-muted">Anos de Código</div>
             </div>
             <div className="text-center">
@@ -58,12 +58,6 @@ export default function HeroSection() {
               <div className="text-sm text-foreground-muted">Curiosidade</div>
             </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-foreground-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </div>
       </div>
     </section>
