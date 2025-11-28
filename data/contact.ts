@@ -17,8 +17,8 @@ export const contactData: ContactInfo[] = [
   },
   {
     type: "website",
-    value: "www.jmdaf.pt",
-    href: "https://www.jmdaf.pt",
+    value: "www.jmdaf.dev",
+    href: "https://www.jmdaf.dev",
   },
   {
     type: "location",
