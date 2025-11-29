@@ -79,7 +79,7 @@ export default function ExperienceSection() {
           <p className="text-foreground-muted mb-4">{t.experience.cvQuestion}</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href="/CV-PT.pdf"
+              href="/CV_PT.pdf"
               target="_blank"
               className="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full hover:bg-accent hover:text-background transition-all duration-300 font-medium"
             >
@@ -89,7 +89,7 @@ export default function ExperienceSection() {
               {t.experience.cvPt}
             </a>
             <a
-              href="/CV-ENG.pdf"
+              href="/CV_ENG.pdf"
               target="_blank"
               className="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full hover:bg-accent hover:text-background transition-all duration-300 font-medium"
             >
