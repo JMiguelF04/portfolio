@@ -56,7 +56,20 @@ export default function Sidebar() {
             ))}
           </ul>
         </nav>
-
+          <div className="p-5 border-t border-border justify-center flex">
+            <a
+              href="/CV_ENG.pdf"
+              target="_blank"
+              className="inline-flex items-center gap-2 px-6 py-6 border border-accent text-accent rounded-full hover:bg-accent hover:text-background transition-all duration-300 font-medium"
+            >
+              <div className=" px-10 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              CV
+              </div>
+            </a>
+          </div>
         <div className="p-6 border-t border-border">
           <div className="flex justify-center mb-4">
             <div className="relative flex items-center p-1 rounded-full bg-background border border-border">
