@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
-import { skillsData, dailyTechnologies } from "@/data/skills";
+import { skillsData, dailyTechnologies, getLevelColor } from "@/data/skills";
 
 export default function SkillsSection() {
   const { t } = useLanguage();
@@ -33,17 +33,11 @@ export default function SkillsSection() {
 
               <div className="space-y-5">
                 {skillGroup.items.map((skill) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-foreground-secondary font-medium">{skill.name}</span>
-                      <span className="text-accent font-mono text-sm">{skill.level}%</span>
-                    </div>
-                    <div className="h-2 bg-background rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-accent to-amber-400 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
+                  <div key={skill.name} className="flex justify-between items-center">
+                    <span className="text-foreground-secondary font-medium">{skill.name}</span>
+                    <span className={`text-sm font-semibold bg-gradient-to-r ${getLevelColor(skill.level)} bg-clip-text text-transparent`}>
+                      {skill.level}
+                    </span>
                   </div>
                 ))}
               </div>

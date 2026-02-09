@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export interface SkillItem {
   name: string;
-  level: number;
+  level: "Advanced" | "Intermediate" | "Basic" | "";
 }
 
 export interface SkillCategory {
@@ -10,6 +10,19 @@ export interface SkillCategory {
   icon: ReactNode;
   items: SkillItem[];
 }
+
+export const getLevelColor = (level: string): string => {
+  switch (level) {
+    case "Advanced":
+      return "from-green-500 to-emerald-400";
+    case "Intermediate":
+      return "from-blue-500 to-cyan-400";
+    case "Basic":
+      return "from-yellow-500 to-amber-400";
+    default:
+      return "from-gray-500 to-gray-400";
+  }
+};
 
 export const skillsData: SkillCategory[] = [
   {
@@ -20,10 +33,10 @@ export const skillsData: SkillCategory[] = [
       </svg>
     ),
     items: [
-      { name: "Next.js", level: 90 },
-      { name: "React", level: 85 },
-      { name: "TypeScript", level: 85 },
-      { name: "Tailwind CSS", level: 90 },
+      { name: "Next.js", level: "Advanced" },
+      { name: "React", level: "Intermediate" },
+      { name: "TypeScript", level: "Intermediate" },
+      { name: "Tailwind CSS", level: "Intermediate" },
     ],
   },
   {
@@ -34,11 +47,11 @@ export const skillsData: SkillCategory[] = [
       </svg>
     ),
     items: [
-      { name: "Java / Spring Boot", level: 75 },
-      { name: "APIs REST", level: 80 },
-      { name: "SQL", level: 80 },
-      { name: "Node.js", level: 70 },
-      { name: "Git & GitHub", level: 85 },
+      { name: "Java / Spring Boot", level: "Intermediate" },
+      { name: "APIs REST", level: "Intermediate" },
+      { name: "SQL", level: "Intermediate" },
+      { name: "Node.js", level: "Advanced" },
+      { name: "Git & GitHub", level: "Advanced" },
     ],
   },
   {
@@ -49,8 +62,8 @@ export const skillsData: SkillCategory[] = [
       </svg>
     ),
     items: [
-      { name: "AI Algorithms", level: 80 },
-      { name: "Python (AI/ML)", level: 75 },
+      { name: "AI Algorithms", level: "Intermediate" },
+      { name: "Python (AI/ML)", level: "Intermediate" },
     ],
   },
   {
@@ -61,10 +74,10 @@ export const skillsData: SkillCategory[] = [
       </svg>
     ),
     items: [
-      { name: "Android (Kotlin)", level: 70 },
-      { name: "Jetpack Compose", level: 65 },
-      { name: "UX/UI Design", level: 95 },
-      { name: "Figma", level: 75 },
+      { name: "Android (Kotlin)", level: "Intermediate" },
+      { name: "Jetpack Compose", level: "Basic" },
+      { name: "UX/UI Design", level: "Advanced" },
+      { name: "Figma", level: "Advanced" },
     ],
   },
 ];
@@ -74,7 +87,7 @@ export const dailyTechnologies = [
   "React",
   "TypeScript",
   "Python",
-  "Tailwind",
+  "Tailwind CSS",
   "Git",
   "Figma",
   "VS Code",
