@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,48 +7,187 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model contacts {
-  id         String   @id
-  type       String
-  value      String
-  href       String?
-  created_at DateTime @default(now()) @db.Timestamp(6)
+model Profile {
+  id                  String   @id
+  name                String
+  headlinePt          String
+  headlineEn          String
+  profileImagePath    String
+  cvFilePath          String
+  locationPt          String
+  locationEn          String
+  website             String
+  email               String
+  phone               String
+  yearsOfProgramming  Int
+  projectsDeveloped   Int
+  englishLevel        String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
 
-model daily_technologies {
-  id         String   @id
-  name       String   @unique
-  created_at DateTime @default(now()) @db.Timestamp(6)
+model ContentEntry {
+  key       String   @id
+  pt        String
+  en        String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model experiences {
-  id           String   @id
-  role         String
+model NavigationItem {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  labelPt   String
+  labelEn   String
+  href      String
+  visible   Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SocialLink {
+  id                 String   @id @default(cuid())
+  platform           String   @unique
+  label              String
+  href               String
+  visibleInSidebar   Boolean  @default(true)
+  visibleInContact   Boolean  @default(true)
+  visibleInFooter    Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model ContactDetail {
+  id        String   @id @default(cuid())
+  type      String   @unique
+  valuePt   String
+  valueEn   String
+  href      String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SpokenLanguage {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  namePt    String
+  nameEn    String
+  levelPt   String
+  levelEn   String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SkillCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  labelPt   String
+  labelEn   String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  skills    Skill[]
+}
+
+model Skill {
+  id              String        @id @default(cuid())
+  skillCategoryId String
+  name            String
+  level           String
+  sortOrder       Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  skillCategory   SkillCategory @relation(fields: [skillCategoryId], references: [id], onDelete: Cascade)
+}
+
+model DailyTechnology {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id           String             @id @default(cuid())
+  slug         String             @unique
+  rolePt       String
+  roleEn       String
   company      String
-  period       String
-  description  String[]
+  periodPt     String
+  periodEn     String
   technologies String[]
-  current      Boolean  @default(false)
-  created_at   DateTime @default(now()) @db.Timestamp(6)
+  current      Boolean            @default(false)
+  sortOrder    Int                @default(0)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  bullets      ExperienceBullet[]
 }
 
-model projects {
-  id           String   @id
-  name         String   @unique
-  description  String
+model ExperienceBullet {
+  id           String     @id @default(cuid())
+  experienceId String
+  textPt       String
+  textEn       String
+  sortOrder    Int        @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  titlePt      String
+  titleEn      String
+  descriptionPt String
+  descriptionEn String
   technologies String[]
   github       String?
   demo         String?
   academic     Boolean  @default(false)
-  created_at   DateTime @default(now()) @db.Timestamp(6)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
-model skills {
-  id         String   @id
-  category   String
-  name       String
-  level      String
-  created_at DateTime @default(now()) @db.Timestamp(6)
+model EducationEntry {
+  id            String               @id @default(cuid())
+  slug          String               @unique
+  degreePt      String
+  degreeEn      String
+  institution   String
+  periodPt      String
+  periodEn      String
+  descriptionPt String
+  descriptionEn String
+  sortOrder     Int                  @default(0)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  highlights    EducationHighlight[]
+}
+
+model EducationHighlight {
+  id               String         @id @default(cuid())
+  educationEntryId String
+  textPt           String
+  textEn           String
+  sortOrder        Int            @default(0)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  educationEntry   EducationEntry @relation(fields: [educationEntryId], references: [id], onDelete: Cascade)
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

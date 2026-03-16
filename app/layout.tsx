@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { getSiteData } from "@/lib/site-data";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -15,20 +16,37 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
-export const metadata: Metadata = {
-  title: "Jorge Ferreira | Junior Developer",
-  description: "Portfolio de Jorge Ferreira - Desenvolvedor Júnior especializado em Next.js, TypeScript, UX/UI Design e desenvolvimento de APIs.",
-  keywords: ["Jorge Ferreira", "Developer", "Next.js", "TypeScript", "React", "Portfolio"],
-  authors: [{ name: "Jorge Ferreira" }],
-  icons: {
-    icon: "/newfavicon.png",
-  },
-  openGraph: {
-    title: "Jorge Ferreira | Junior Developer",
-    description: "Portfolio de Jorge Ferreira - Desenvolvedor Júnior",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteData = await getSiteData();
+  const title = `${siteData.profile.name} | ${siteData.profile.headlineEn}`;
+  const description =
+    siteData.content["hero.description"]?.en ??
+    "Computer Engineering portfolio built with Next.js, Prisma and PostgreSQL.";
+
+  return {
+    title,
+    description,
+    keywords: [
+      siteData.profile.name,
+      "Developer",
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Portfolio",
+      "Prisma",
+      "PostgreSQL",
+    ],
+    authors: [{ name: siteData.profile.name }],
+    icons: {
+      icon: "/newfavicon.png",
+    },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default function RootLayout({
   children,

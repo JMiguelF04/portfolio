@@ -1,9 +1,16 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import { getContentText } from "@/lib/localize";
+import type { LocalizedText, ProfileData } from "@/lib/site-types";
 
-export default function HeroSection() {
-  const { t } = useLanguage();
+interface HeroSectionProps {
+  profile: ProfileData;
+  content: Record<string, LocalizedText>;
+}
+
+export default function HeroSection({ profile, content }: HeroSectionProps) {
+  const { language } = useLanguage();
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -14,16 +21,20 @@ export default function HeroSection() {
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-muted border border-accent/20 mb-8">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-sm text-accent font-medium">{t.hero.available}</span>
+            <span className="text-sm text-accent font-medium">
+              {getContentText(content, "hero.available", language)}
+            </span>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            {t.hero.title}{" "}
-            <span className="gradient-text">{t.hero.titleHighlight}</span>
+            {getContentText(content, "hero.title", language)}{" "}
+            <span className="gradient-text">
+              {getContentText(content, "hero.titleHighlight", language)}
+            </span>
           </h1>
           
           <p className="text-lg md:text-xl text-foreground-secondary leading-relaxed mb-10 max-w-2xl mx-auto">
-            {t.hero.description}
+            {getContentText(content, "hero.description", language)}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -34,13 +45,13 @@ export default function HeroSection() {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              {t.hero.cta}
+              {getContentText(content, "hero.cta", language)}
             </a>
             <a
               href="#sobre"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-border text-foreground font-semibold rounded-full hover:border-accent hover:text-accent transition-all duration-300"
             >
-              {t.hero.learnMore}
+              {getContentText(content, "hero.learnMore", language)}
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
@@ -49,12 +60,20 @@ export default function HeroSection() {
 
           <div className="grid grid-cols-2 gap-8 mt-16 pt-16 border-t border-border/50 max-w-lg mx-auto">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">2+</div>
-              <div className="text-sm text-foreground-muted">{t.hero.yearsOfCode}</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                {profile.yearsOfProgramming}+
+              </div>
+              <div className="text-sm text-foreground-muted">
+                {getContentText(content, "hero.yearsOfCode", language)}
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">3+</div>
-              <div className="text-sm text-foreground-muted">{t.hero.projects}</div>
+              <div className="text-3xl md:text-4xl font-bold text-accent mb-1">
+                {profile.projectsDeveloped}+
+              </div>
+              <div className="text-sm text-foreground-muted">
+                {getContentText(content, "hero.projects", language)}
+              </div>
             </div>
             
           </div>

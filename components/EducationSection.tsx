@@ -1,9 +1,24 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import { getContentText, localizeText } from "@/lib/localize";
+import type { EducationEntryData, LocalizedText } from "@/lib/site-types";
 
-export default function EducationSection() {
-  const { t } = useLanguage();
+interface EducationSectionProps {
+  content: Record<string, LocalizedText>;
+  educationEntries: EducationEntryData[];
+}
+
+export default function EducationSection({
+  content,
+  educationEntries,
+}: EducationSectionProps) {
+  const { language } = useLanguage();
+  const educationEntry = educationEntries[0];
+
+  if (!educationEntry) {
+    return null;
+  }
 
   return (
     <section id="educacao" className="py-24 bg-background-secondary relative">
@@ -12,8 +27,12 @@ export default function EducationSection() {
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">{t.education.subtitle}</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">{t.education.title}</h2>
+          <span className="text-accent font-mono text-sm tracking-wider uppercase">
+            {getContentText(content, "education.subtitle", language)}
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
+            {getContentText(content, "education.title", language)}
+          </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
         </div>
 
@@ -32,9 +51,13 @@ export default function EducationSection() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-1">{t.education.degree}</h3>
-                    <p className="text-accent font-medium text-lg">{t.education.institution}</p>
-                    <p className="text-foreground-muted">{t.education.description}</p>
+                    <h3 className="text-2xl font-bold text-foreground mb-1">
+                      {localizeText(language, educationEntry.degreePt, educationEntry.degreeEn)}
+                    </h3>
+                    <p className="text-accent font-medium text-lg">{educationEntry.institution}</p>
+                    <p className="text-foreground-muted">
+                      {localizeText(language, educationEntry.descriptionPt, educationEntry.descriptionEn)}
+                    </p>
                   </div>
                 </div>
                 
@@ -42,7 +65,9 @@ export default function EducationSection() {
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-accent font-semibold">{t.education.period}</span>
+                  <span className="text-accent font-semibold">
+                    {localizeText(language, educationEntry.periodPt, educationEntry.periodEn)}
+                  </span>
                 </div>
               </div>
 
@@ -51,19 +76,21 @@ export default function EducationSection() {
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                   </svg>
-                  {t.education.coursesTitle}
+                  {getContentText(content, "education.coursesTitle", language)}
                 </h4>
                 
                 <div className="grid md:grid-cols-2 gap-4">
-                  {t.education.courses.map((course, index) => (
+                  {educationEntry.highlights.map((course, index) => (
                     <div
-                      key={index}
+                      key={course.id}
                       className="flex items-start gap-3 p-4 rounded-xl bg-background/50 border border-border/50"
                     >
                       <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-accent text-xs font-bold">{index + 1}</span>
                       </div>
-                      <span className="text-foreground-secondary">{course}</span>
+                      <span className="text-foreground-secondary">
+                        {localizeText(language, course.textPt, course.textEn)}
+                      </span>
                     </div>
                   ))}
                 </div>
