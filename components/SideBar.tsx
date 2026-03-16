@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/LanguageContext";
 import { socialLinks } from "@/data/social";
-import { navItems } from "@/data/navigation";
+import { navItems } from "@/components/navigation";
 
 export default function Sidebar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
