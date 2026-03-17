@@ -21,24 +21,24 @@ export default function EducationSection({
   }
 
   return (
-    <section id="educacao" className="py-24 bg-background-secondary relative">
+    <section id="educacao" className="py-24 bg-background-secondary/45 relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">
+          <span className="section-kicker">
             {getContentText(content, "education.subtitle", language)}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
+          <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "education.title", language)}
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="p-8 md:p-12 rounded-3xl bg-card border border-border hover-card relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
+          <div className="p-8 md:p-12 rounded-[2rem] bg-card border border-border/70 hover-card relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
             
             <div className="relative z-10">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
@@ -61,7 +61,7 @@ export default function EducationSection({
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-accent-muted self-start">
+                <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-accent-muted border border-accent/20 self-start">
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -83,7 +83,7 @@ export default function EducationSection({
                   {educationEntry.highlights.map((course, index) => (
                     <div
                       key={course.id}
-                      className="flex items-start gap-3 p-4 rounded-xl bg-background/50 border border-border/50"
+                      className="flex items-start gap-3 p-4 rounded-2xl bg-background/50 border border-border/60"
                     >
                       <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-accent text-xs font-bold">{index + 1}</span>

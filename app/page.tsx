@@ -18,14 +18,14 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background noise-overlay">
+    <div className="min-h-screen noise-overlay">
       <Sidebar
         profile={siteData.profile}
         content={siteData.content}
         navigationItems={siteData.navigationItems}
         socialLinks={siteData.socialLinks}
       />
-      <main className="lg:ml-72">
+      <main className="lg:ml-72 xl:ml-80">
         <div className="h-16 lg:hidden" />
         
         <HeroSection profile={siteData.profile} content={siteData.content} />

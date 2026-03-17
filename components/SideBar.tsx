@@ -89,11 +89,11 @@ export default function Sidebar({
 
   return (
     <>
-      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-72 flex-col bg-card border-r border-border z-50">
-        <div className="p-8 text-center border-b border-border">
+      <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-72 xl:w-80 flex-col bg-card/80 backdrop-blur-xl border-r border-border/80 z-50 shadow-[0_24px_60px_rgba(85,65,39,0.16)]">
+        <div className="p-8 text-center border-b border-border/70">
           <div className="relative w-28 h-28 mx-auto mb-4 group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent via-amber-400 to-accent rounded-full blur opacity-30 group-hover:opacity-50 transition-opacity duration-500" />
-            <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-border">
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent via-[#d68e51] to-[#2f5f86] rounded-full blur opacity-35 group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-border/80 bg-background-secondary">
               <Image
                 src={profile.profileImagePath}
                 alt={profile.name}
@@ -103,12 +103,12 @@ export default function Sidebar({
               />
             </div>
           </div>
-          <h1 className="text-xl font-bold text-foreground mb-1">{profile.name}</h1>
-          <p className="text-accent font-medium text-sm">
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground mb-1">{profile.name}</h1>
+          <p className="text-accent font-semibold text-sm">
             {localizeText(language, profile.headlinePt, profile.headlineEn)}
           </p>
           
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-muted mt-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-muted mt-5 border border-accent/20">
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <span className="text-xs text-accent font-medium">
               {getContentText(content, "sidebar.available", language)}
@@ -117,12 +117,12 @@ export default function Sidebar({
         </div>
 
         <nav className="flex-1 p-6 overflow-y-auto">
-          <ul className="space-y-2">
+          <ul className="space-y-2.5">
             {navigationItems.filter((item) => item.visible).map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-foreground-secondary hover:text-foreground hover:bg-background-tertiary transition-all duration-200 group"
+                  className="flex items-center gap-3 px-4 py-3 rounded-2xl text-foreground-secondary hover:text-foreground hover:bg-background-secondary transition-all duration-200 group border border-transparent hover:border-border/75"
                 >
                   <span className="text-foreground-muted group-hover:text-accent transition-colors">
                     {navigationIcons[item.slug]}
@@ -135,13 +135,13 @@ export default function Sidebar({
             ))}
           </ul>
         </nav>
-          <div className="p-5 border-t border-border justify-center flex">
+          <div className="p-5 border-t border-border/70 justify-center flex">
             <a
               href={profile.cvFilePath}
               target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-6 border border-accent text-accent rounded-full hover:bg-accent hover:text-background transition-all duration-300 font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3.5 border border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all duration-300 font-semibold"
             >
-              <div className=" px-10 flex items-center gap-2">
+              <div className="px-6 xl:px-10 flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
@@ -149,9 +149,9 @@ export default function Sidebar({
               </div>
             </a>
           </div>
-        <div className="p-6 border-t border-border">
+        <div className="p-6 border-t border-border/70">
           <div className="flex justify-center mb-4">
-            <div className="relative flex items-center p-1 rounded-full bg-background border border-border">
+            <div className="relative flex items-center p-1 rounded-full bg-background-secondary border border-border">
               <button
                 onClick={() => setLanguage("pt")}
                 className={`relative z-10 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
@@ -187,7 +187,7 @@ export default function Sidebar({
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="w-10 h-10 flex items-center justify-center rounded-xl border border-border text-foreground-secondary hover:border-accent hover:text-accent hover:bg-accent-muted transition-all duration-300"
+                className="w-11 h-11 flex items-center justify-center rounded-2xl border border-border text-foreground-secondary hover:border-accent hover:text-accent hover:bg-accent-muted transition-all duration-300"
                 aria-label={link.label}
               >
                 {sidebarIcons[link.platform]}
@@ -200,7 +200,7 @@ export default function Sidebar({
         </div>
       </aside>
 
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 glass border-b border-border">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 glass border-b border-border/70">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden border border-border">
@@ -222,7 +222,7 @@ export default function Sidebar({
           <div className="flex items-center gap-2">
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-background border border-border hover:border-accent transition-all duration-300"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-background-secondary border border-border hover:border-accent transition-all duration-300"
             >
               <span className={`text-xs font-bold transition-colors ${language === "pt" ? "text-accent" : "text-foreground-muted"}`}>
                 PT
@@ -236,7 +236,7 @@ export default function Sidebar({
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-border hover:border-accent transition-colors"
+              className="w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-border hover:border-accent transition-colors bg-card/50"
               aria-label="Menu"
             >
               <span
@@ -260,7 +260,7 @@ export default function Sidebar({
       </header>
 
       <div
-        className={`lg:hidden fixed inset-0 z-40 bg-background/98 backdrop-blur-xl transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-xl transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
       >

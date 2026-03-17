@@ -21,10 +21,10 @@ export default function ExperienceSection({
     <section id="experiencia" className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">
+          <span className="section-kicker">
             {getContentText(content, "experience.subtitle", language)}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
+          <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "experience.title", language)}
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
@@ -32,7 +32,7 @@ export default function ExperienceSection({
 
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2" />
+            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border/80 md:-translate-x-1/2" />
 
             {experiences.map((experience, index) => (
               <div
@@ -48,7 +48,7 @@ export default function ExperienceSection({
                 </div>
 
                 <div className={`ml-8 md:ml-0 ${index % 2 === 0 ? "md:mr-12" : "md:ml-12"}`}>
-                  <div className="p-8 rounded-2xl bg-card border border-border hover-card">
+                  <div className="p-8 rounded-3xl bg-card border border-border/70 hover-card">
                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                       <div>
                         <h3 className="text-xl font-bold text-foreground">
@@ -56,7 +56,7 @@ export default function ExperienceSection({
                         </h3>
                         <p className="text-accent font-medium">{experience.company}</p>
                       </div>
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent-muted">
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent-muted border border-accent/20">
                         <svg className="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -81,7 +81,7 @@ export default function ExperienceSection({
                       {experience.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-sm rounded-full bg-background border border-border text-foreground-secondary"
+                          className="px-3 py-1 text-sm rounded-full bg-background border border-border/80 text-foreground-secondary"
                         >
                           {tech}
                         </span>
@@ -102,7 +102,7 @@ export default function ExperienceSection({
             <a
               href={profile.cvFilePath}
               target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full hover:bg-accent hover:text-background transition-all duration-300 font-medium"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all duration-300 font-medium"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

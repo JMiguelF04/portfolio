@@ -45,11 +45,11 @@ export default function Footer({
   const { language } = useLanguage();
 
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="py-12 border-t border-border/70 bg-card/65 backdrop-blur-md">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <a href="#" className="text-xl font-bold text-foreground inline-block mb-2">
+            <a href="#" className="text-2xl font-semibold tracking-tight text-foreground inline-block mb-2">
               {profile.name}
             </a>
             <p className="text-foreground-muted text-sm">
@@ -57,15 +57,15 @@ export default function Footer({
             </p>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5 flex-wrap justify-center">
             {navigationItems
               .filter((item) => ["about", "skills", "experience", "contact"].includes(item.slug))
               .map((item) => (
                 <a
                   key={item.id}
                   href={item.href}
-                  className="text-foreground-secondary hover:text-accent transition-colors text-sm"
-                >
+                className="text-foreground-secondary hover:text-accent transition-colors text-sm font-medium"
+              >
                   {language === "pt" ? item.labelPt : item.labelEn}
                 </a>
               ))}
@@ -78,7 +78,7 @@ export default function Footer({
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-border text-foreground-secondary hover:border-accent hover:text-accent transition-all duration-300"
+                className="w-10 h-10 flex items-center justify-center rounded-2xl border border-border text-foreground-secondary hover:border-accent hover:text-accent transition-all duration-300"
                 aria-label={link.label}
               >
                 {footerIcons[link.platform]}
@@ -87,7 +87,7 @@ export default function Footer({
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border/50 text-center">
+        <div className="mt-8 pt-8 border-t border-border/60 text-center">
           <p className="text-foreground-muted text-sm">
             {getContentText(content, "footer.madeWith", language)}
           </p>

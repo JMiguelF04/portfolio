@@ -49,16 +49,16 @@ export default function ContactSection({
     <section id="contacto" className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">
+          <span className="section-kicker">
             {getContentText(content, "contact.subtitle", language)}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
+          <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "contact.title", language)}
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
         </div>
 
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-2xl mx-auto bg-card/70 border border-border/70 rounded-[2rem] p-8 md:p-10 shadow-[0_20px_45px_rgba(85,65,39,0.12)]">
           <div className="text-center mb-8">
             <h3 className="text-xl font-semibold mb-4">
               {getContentText(content, "contact.getInTouch", language)}
@@ -84,7 +84,7 @@ export default function ContactSection({
                 <Component
                   key={item.type}
                   {...linkProps}
-                  className={`flex items-center gap-4 p-4 rounded-xl bg-card border border-border ${
+                  className={`flex items-center gap-4 p-4 rounded-2xl bg-background/55 border border-border/70 ${
                     isLink ? "hover:border-accent transition-all duration-300 group" : ""
                   }`}
                 >
@@ -115,7 +115,7 @@ export default function ContactSection({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 flex items-center justify-center rounded-xl border border-border text-foreground-secondary hover:border-accent hover:text-accent hover:bg-accent-muted transition-all duration-300"
+                  className="w-12 h-12 flex items-center justify-center rounded-2xl border border-border text-foreground-secondary hover:border-accent hover:text-accent hover:bg-accent-muted transition-all duration-300"
                 >
                   {link.label === "GitHub" ? (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

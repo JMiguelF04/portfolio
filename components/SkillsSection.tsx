@@ -80,16 +80,16 @@ export default function SkillsSection({
   const { language } = useLanguage();
 
   return (
-    <section id="competencias" className="py-24 bg-background-secondary relative">
+    <section id="competencias" className="py-24 bg-background-secondary/45 relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-accent font-mono text-sm tracking-wider uppercase">
+          <span className="section-kicker">
             {getContentText(content, "skills.subtitle", language)}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
+          <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "skills.title", language)}
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
@@ -99,10 +99,10 @@ export default function SkillsSection({
           {skillCategories.map((skillGroup) => (
             <div
               key={skillGroup.id}
-              className="p-8 rounded-2xl bg-card border border-border hover-card"
+              className="p-8 rounded-3xl bg-card border border-border/70 hover-card"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-accent-muted flex items-center justify-center text-accent">
+                <div className="w-12 h-12 rounded-2xl bg-accent-muted flex items-center justify-center text-accent">
                   {skillCategoryIcons[skillGroup.slug]}
                 </div>
                 <h3 className="text-xl font-semibold">
@@ -136,7 +136,7 @@ export default function SkillsSection({
             {dailyTechnologies.map((tech) => (
               <div
                 key={tech.id}
-                className="px-5 py-3 rounded-xl bg-card border border-border text-foreground-secondary font-medium hover:border-accent hover:text-accent transition-all duration-300"
+                className="px-5 py-3 rounded-2xl bg-card border border-border/70 text-foreground-secondary font-medium hover:border-accent hover:text-accent transition-all duration-300"
               >
                 {tech.name}
               </div>

@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0c0c0c;
-  --background-secondary: #141414;
-  --background-tertiary: #1a1a1a;
-  --foreground: #fafafa;
-  --foreground-secondary: #a1a1a1;
-  --foreground-muted: #6b6b6b;
-  --accent: #f59e0b;
-  --accent-hover: #fbbf24;
-  --accent-muted: rgba(245, 158, 11, 0.15);
-  --border: #262626;
-  --border-hover: #404040;
-  --card: #111111;
-  --card-hover: #181818;
+  --background: #090c12;
+  --background-secondary: #101723;
+  --background-tertiary: #172131;
+  --foreground: #f3f6fb;
+  --foreground-secondary: #b6c3d9;
+  --foreground-muted: #7f91ac;
+  --accent: #d17a57;
+  --accent-hover: #e08d69;
+  --accent-muted: rgba(209, 122, 87, 0.18);
+  --border: #233146;
+  --border-hover: #3a4a63;
+  --card: #0e141f;
+  --card-hover: #141f2f;
 }
 
 @theme inline {
@@ -43,10 +43,14 @@ html {
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(209, 122, 87, 0.22), transparent 35%),
+    radial-gradient(circle at 85% 70%, rgba(73, 117, 163, 0.18), transparent 42%),
+    linear-gradient(165deg, #0c1019 0%, #0a0f17 58%, #080d14 100%);
   color: var(--foreground);
   font-family: var(--font-sora), system-ui, sans-serif;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -54,7 +58,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: rgba(8, 12, 20, 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -68,7 +72,7 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: var(--background);
+  color: #ffffff;
 }
 
 @keyframes fadeInUp {
@@ -104,10 +108,10 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 0 20px rgba(182, 95, 60, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 44px rgba(182, 95, 60, 0.34);
   }
 }
 
@@ -157,7 +161,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent) 0%, #fcd34d 50%, var(--accent) 100%);
+  background: linear-gradient(120deg, #b65f3c 0%, #d68e51 36%, #2f5f86 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -166,20 +170,22 @@ body {
 }
 
 .glass {
-  background: rgba(17, 17, 17, 0.8);
-  backdrop-filter: blur(12px);
+  background: rgba(12, 18, 29, 0.78);
+  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--border), #000 20%);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
 }
 
 .hover-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .hover-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.42);
   border-color: var(--border-hover);
+  background: var(--card-hover);
 }
 
 .noise-overlay::before {
@@ -190,14 +196,16 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.02;
-  z-index: 1000;
+  opacity: 0.03;
+  z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 section {
   opacity: 0;
   animation: fadeInUp 0.8s ease-out forwards;
+  position: relative;
+  z-index: 2;
 }
 
 section:nth-child(1) { animation-delay: 0s; }
@@ -206,3 +214,27 @@ section:nth-child(3) { animation-delay: 0.2s; }
 section:nth-child(4) { animation-delay: 0.3s; }
 section:nth-child(5) { animation-delay: 0.4s; }
 section:nth-child(6) { animation-delay: 0.5s; }
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent-muted), #000 30%);
+  border: 1px solid color-mix(in srgb, var(--accent), #111827 40%);
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.section-kicker::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent), transparent 83%);
+}
