@@ -33,7 +33,7 @@ export default function EducationSection({
           <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "education.title", language)}
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+          <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
         </div>
 
         <div className="max-w-4xl mx-auto">

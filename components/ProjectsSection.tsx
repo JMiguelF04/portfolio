@@ -25,7 +25,7 @@ export default function ProjectsSection({ content, projects }: ProjectsSectionPr
           <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "projects.title", language)}
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+          <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">

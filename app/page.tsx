@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Sidebar from "@/components/SideBar";
 import HeroSection from "@/components/HeroSection";
 import Footer from "@/components/Footer";

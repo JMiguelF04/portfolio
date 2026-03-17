@@ -55,7 +55,7 @@ export default function ContactSection({
           <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
             {getContentText(content, "contact.title", language)}
           </h2>
-          <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
+          <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
         </div>
 
         <div className="max-w-2xl mx-auto bg-card/70 border border-border/70 rounded-[2rem] p-8 md:p-10 shadow-[0_20px_45px_rgba(85,65,39,0.12)]">
@@ -74,7 +74,7 @@ export default function ContactSection({
               const Component = isLink ? "a" : "div";
               const linkProps = isLink
                 ? {
-                    href: item.href,
+                    href: item.href ?? undefined,
                     target: item.type === "website" ? "_blank" : undefined,
                     rel: item.type === "website" ? "noopener noreferrer" : undefined,
                   }
