@@ -8,6 +8,14 @@ import { prisma } from "@/lib/prisma";
 import type { SiteData } from "@/lib/site-types";
 
 function shouldUseFallback(error: unknown) {
+  if (error instanceof Prisma.PrismaClientInitializationError) {
+    return true;
+  }
+
+  if (error instanceof Prisma.PrismaClientValidationError) {
+    return true;
+  }
+
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     return error.code === "P2021" || error.code === "P2022";
   }

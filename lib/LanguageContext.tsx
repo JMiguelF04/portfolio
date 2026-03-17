@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useSyncExternalStore } from "react";
 import type { Language } from "@/lib/site-types";
 
 interface LanguageContextType {
@@ -10,19 +10,40 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window === "undefined") {
-      return "pt";
-    }
+const LANGUAGE_STORAGE_KEY = "language";
 
-    const savedLang = localStorage.getItem("language");
-    return savedLang === "pt" || savedLang === "en" ? savedLang : "pt";
-  });
+function getStoredLanguage(): Language {
+  if (typeof window === "undefined") {
+    return "pt";
+  }
+
+  const savedLang = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return savedLang === "pt" || savedLang === "en" ? savedLang : "pt";
+}
+
+function subscribe(onStoreChange: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === LANGUAGE_STORAGE_KEY) {
+      onStoreChange();
+    }
+  };
+
+  window.addEventListener("storage", handleStorage);
+  return () => {
+    window.removeEventListener("storage", handleStorage);
+  };
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const language = useSyncExternalStore(subscribe, getStoredLanguage, () => "pt");
 
   const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem("language", lang);
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    window.dispatchEvent(new StorageEvent("storage", { key: LANGUAGE_STORAGE_KEY }));
   };
 
   return (
