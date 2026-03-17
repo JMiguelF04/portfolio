@@ -2,14 +2,10 @@
 
 import { useState, JSX } from "react";
 import Image from "next/image";
-import { useLanguage } from "@/lib/LanguageContext";
-import { getContentText, localizeText } from "@/lib/localize";
-import type {
-  LocalizedText,
-  NavigationItemData,
-  ProfileData,
-  SocialLinkData,
-} from "@/lib/site-types";
+import type { LocalizedText, NavigationItemData, ProfileData, SocialLinkData } from "@/lib/site-types";
+
+const t = (content: Record<string, LocalizedText>, key: string) =>
+  content[key]?.en ?? "";
 
 const sidebarIcons: Record<string, JSX.Element> = {
   github: (
@@ -74,18 +70,8 @@ interface SidebarProps {
   socialLinks: SocialLinkData[];
 }
 
-export default function Sidebar({
-  profile,
-  content,
-  navigationItems,
-  socialLinks,
-}: SidebarProps) {
+export default function Sidebar({ profile, content, navigationItems, socialLinks }: SidebarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { language, setLanguage } = useLanguage();
-
-  const toggleLanguage = () => {
-    setLanguage(language === "pt" ? "en" : "pt");
-  };
 
   return (
     <>
@@ -97,25 +83,14 @@ export default function Sidebar({
             <div className="absolute -inset-[3px] bg-gradient-to-br from-accent/50 via-blue-400/20 to-accent/30 rounded-full" />
             <div className="absolute -inset-1 bg-accent/10 rounded-full blur-md group-hover:bg-accent/20 transition-all duration-500" />
             <div className="relative w-24 h-24 rounded-full overflow-hidden bg-background-secondary">
-              <Image
-                src={profile.profileImagePath}
-                alt={profile.name}
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src={profile.profileImagePath} alt={profile.name} fill className="object-cover" priority />
             </div>
           </div>
           <h1 className="text-xl font-semibold tracking-tight text-foreground mb-0.5">{profile.name}</h1>
-          <p className="text-accent font-medium text-sm font-mono">
-            {localizeText(language, profile.headlinePt, profile.headlineEn)}
-          </p>
-
+          <p className="text-accent font-medium text-sm font-mono">{profile.headlineEn}</p>
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-muted mt-4 border border-accent/20">
             <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
-            <span className="text-xs text-accent font-medium font-mono">
-              {getContentText(content, "sidebar.available", language)}
-            </span>
+            <span className="text-xs text-accent font-medium font-mono">{t(content, "sidebar.available")}</span>
           </div>
         </div>
 
@@ -131,9 +106,7 @@ export default function Sidebar({
                   <span className="text-foreground-muted group-hover:text-accent transition-colors duration-200">
                     {navigationIcons[item.slug]}
                   </span>
-                  <span className="font-medium text-sm">
-                    {localizeText(language, item.labelPt, item.labelEn)}
-                  </span>
+                  <span className="font-medium text-sm">{item.labelEn}</span>
                 </a>
               </li>
             ))}
@@ -154,34 +127,8 @@ export default function Sidebar({
           </a>
         </div>
 
-        {/* Language + socials */}
+        {/* Socials */}
         <div className="px-5 pb-6 border-t border-border/50 pt-4">
-          <div className="flex justify-center mb-4">
-            <div className="relative flex items-center p-1 rounded-full bg-background-secondary border border-border/60">
-              <button
-                onClick={() => setLanguage("pt")}
-                className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
-                  language === "pt" ? "text-white" : "text-foreground-muted hover:text-foreground"
-                }`}
-              >
-                PT
-              </button>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`relative z-10 px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
-                  language === "en" ? "text-white" : "text-foreground-muted hover:text-foreground"
-                }`}
-              >
-                EN
-              </button>
-              <div
-                className={`absolute top-1 h-[calc(100%-8px)] w-[calc(50%-4px)] rounded-full bg-accent transition-all duration-300 ease-out ${
-                  language === "pt" ? "left-1" : "left-[calc(50%+1px)]"
-                }`}
-              />
-            </div>
-          </div>
-
           <div className="flex justify-center gap-2.5 mb-4">
             {socialLinks.filter((link) => link.visibleInSidebar).map((link) => (
               <a
@@ -196,9 +143,7 @@ export default function Sidebar({
               </a>
             ))}
           </div>
-          <p className="text-center text-foreground-muted text-xs">
-            © 2026 {profile.name}
-          </p>
+          <p className="text-center text-foreground-muted text-xs">© 2026 {profile.name}</p>
         </div>
       </aside>
 
@@ -207,68 +152,37 @@ export default function Sidebar({
         <div className="flex items-center justify-between px-5 py-3.5">
           <div className="flex items-center gap-3">
             <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border">
-              <Image
-                src={profile.profileImagePath}
-                alt={profile.name}
-                fill
-                className="object-cover"
-              />
+              <Image src={profile.profileImagePath} alt={profile.name} fill className="object-cover" />
             </div>
             <div>
               <p className="font-semibold text-foreground text-sm leading-none">{profile.name}</p>
-              <p className="text-accent text-xs font-mono mt-0.5">
-                {localizeText(language, profile.headlinePt, profile.headlineEn)}
-              </p>
+              <p className="text-accent text-xs font-mono mt-0.5">{profile.headlineEn}</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-background-secondary border border-border hover:border-accent/40 transition-all duration-300"
-            >
-              <span className={`text-xs font-bold transition-colors ${language === "pt" ? "text-accent" : "text-foreground-muted"}`}>PT</span>
-              <div className="w-7 h-3.5 rounded-full bg-background-tertiary relative">
-                <div className={`absolute top-0.5 w-2.5 h-2.5 rounded-full bg-accent transition-all duration-300 ${language === "pt" ? "left-0.5" : "left-[calc(100%-12px)]"}`} />
-              </div>
-              <span className={`text-xs font-bold transition-colors ${language === "en" ? "text-accent" : "text-foreground-muted"}`}>EN</span>
-            </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-border hover:border-accent/40 transition-colors bg-card/50"
-              aria-label="Menu"
-            >
-              <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
-              <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-            </button>
-          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-xl border border-border hover:border-accent/40 transition-colors bg-card/50"
+            aria-label="Menu"
+          >
+            <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`} />
+            <span className={`w-4.5 h-0.5 bg-foreground transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
         </div>
       </header>
 
       {/* Mobile overlay menu */}
-      <div
-        className={`lg:hidden fixed inset-0 z-40 bg-background/97 backdrop-blur-2xl transition-all duration-300 ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-        }`}
-      >
+      <div className={`lg:hidden fixed inset-0 z-40 bg-background/97 backdrop-blur-2xl transition-all duration-300 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}>
         <div className="flex flex-col h-full pt-20 pb-8 px-6">
           <div className="text-center py-8 border-b border-border/50">
-            <div className="relative w-20 h-20 mx-auto mb-4 group">
+            <div className="relative w-20 h-20 mx-auto mb-4">
               <div className="absolute -inset-[2px] bg-gradient-to-br from-accent/50 to-blue-400/20 rounded-full" />
-              <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-transparent bg-background-secondary">
-                <Image
-                  src={profile.profileImagePath}
-                  alt={profile.name}
-                  fill
-                  className="object-cover"
-                />
+              <div className="relative w-20 h-20 rounded-full overflow-hidden bg-background-secondary">
+                <Image src={profile.profileImagePath} alt={profile.name} fill className="object-cover" />
               </div>
             </div>
             <h2 className="text-lg font-semibold text-foreground">{profile.name}</h2>
-            <p className="text-accent font-medium text-sm font-mono">
-              {localizeText(language, profile.headlinePt, profile.headlineEn)}
-            </p>
+            <p className="text-accent font-medium text-sm font-mono">{profile.headlineEn}</p>
           </div>
 
           <nav className="flex-1 py-6">
@@ -281,9 +195,7 @@ export default function Sidebar({
                     className="flex items-center gap-4 px-4 py-3.5 rounded-xl text-foreground-secondary hover:text-foreground hover:bg-background-secondary transition-all duration-200"
                   >
                     <span className="text-accent">{navigationIcons[item.slug]}</span>
-                    <span className="text-base font-medium">
-                      {localizeText(language, item.labelPt, item.labelEn)}
-                    </span>
+                    <span className="text-base font-medium">{item.labelEn}</span>
                   </a>
                 </li>
               ))}

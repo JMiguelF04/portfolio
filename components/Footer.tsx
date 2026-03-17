@@ -1,14 +1,15 @@
 "use client";
 
 import { JSX } from "react";
-import { useLanguage } from "@/lib/LanguageContext";
-import { getContentText } from "@/lib/localize";
 import type {
   LocalizedText,
   NavigationItemData,
   ProfileData,
   SocialLinkData,
 } from "@/lib/site-types";
+
+const t = (content: Record<string, LocalizedText>, key: string) =>
+  content[key]?.en ?? "";
 
 const footerIcons: Record<string, JSX.Element> = {
   github: (
@@ -42,7 +43,6 @@ export default function Footer({
   socialLinks,
 }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const { language } = useLanguage();
 
   return (
     <footer className="py-12 border-t border-border/70 bg-card/65 backdrop-blur-md">
@@ -53,7 +53,7 @@ export default function Footer({
               {profile.name}
             </a>
             <p className="text-foreground-muted text-sm">
-              © {currentYear} {profile.name}. {getContentText(content, "footer.rights", language)}
+              © {currentYear} {profile.name}. {t(content, "footer.rights")}
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export default function Footer({
                   href={item.href}
                 className="text-foreground-secondary hover:text-accent transition-colors text-sm font-medium"
               >
-                  {language === "pt" ? item.labelPt : item.labelEn}
+                  {item.labelEn}
                 </a>
               ))}
           </div>
@@ -89,7 +89,7 @@ export default function Footer({
 
         <div className="mt-8 pt-8 border-t border-border/60 text-center">
           <p className="text-foreground-muted text-sm">
-            {getContentText(content, "footer.madeWith", language)}
+            {t(content, "footer.madeWith")}
           </p>
         </div>
       </div>

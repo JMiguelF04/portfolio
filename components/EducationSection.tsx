@@ -1,37 +1,29 @@
 "use client";
 
-import { useLanguage } from "@/lib/LanguageContext";
-import { getContentText, localizeText } from "@/lib/localize";
 import type { EducationEntryData, LocalizedText } from "@/lib/site-types";
+
+const t = (content: Record<string, LocalizedText>, key: string) =>
+  content[key]?.en ?? "";
 
 interface EducationSectionProps {
   content: Record<string, LocalizedText>;
   educationEntries: EducationEntryData[];
 }
 
-export default function EducationSection({
-  content,
-  educationEntries,
-}: EducationSectionProps) {
-  const { language } = useLanguage();
+export default function EducationSection({ content, educationEntries }: EducationSectionProps) {
   const educationEntry = educationEntries[0];
-
-  if (!educationEntry) {
-    return null;
-  }
+  if (!educationEntry) return null;
 
   return (
-    <section id="educacao" className="py-24 bg-background-secondary/45 relative">
+    <section id="educacao" className="py-24 bg-background-secondary/40 relative">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="section-kicker">
-            {getContentText(content, "education.subtitle", language)}
-          </span>
+          <span className="section-kicker">{t(content, "education.subtitle")}</span>
           <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
-            {getContentText(content, "education.title", language)}
+            {t(content, "education.title")}
           </h2>
           <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
         </div>
@@ -39,7 +31,7 @@ export default function EducationSection({
         <div className="max-w-4xl mx-auto">
           <div className="p-8 md:p-12 rounded-[2rem] bg-card border border-border/70 hover-card relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
-            
+
             <div className="relative z-10">
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -51,23 +43,17 @@ export default function EducationSection({
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-1">
-                      {localizeText(language, educationEntry.degreePt, educationEntry.degreeEn)}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-foreground mb-1">{educationEntry.degreeEn}</h3>
                     <p className="text-accent font-medium text-lg">{educationEntry.institution}</p>
-                    <p className="text-foreground-muted">
-                      {localizeText(language, educationEntry.descriptionPt, educationEntry.descriptionEn)}
-                    </p>
+                    <p className="text-foreground-muted">{educationEntry.descriptionEn}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2 px-5 py-3 rounded-full bg-accent-muted border border-accent/20 self-start">
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-accent font-semibold">
-                    {localizeText(language, educationEntry.periodPt, educationEntry.periodEn)}
-                  </span>
+                  <span className="text-accent font-semibold">{educationEntry.periodEn}</span>
                 </div>
               </div>
 
@@ -76,21 +62,16 @@ export default function EducationSection({
                   <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                   </svg>
-                  {getContentText(content, "education.coursesTitle", language)}
+                  {t(content, "education.coursesTitle")}
                 </h4>
-                
+
                 <div className="grid md:grid-cols-2 gap-4">
                   {educationEntry.highlights.map((course, index) => (
-                    <div
-                      key={course.id}
-                      className="flex items-start gap-3 p-4 rounded-2xl bg-background/50 border border-border/60"
-                    >
+                    <div key={course.id} className="flex items-start gap-3 p-4 rounded-2xl bg-background/50 border border-border/60">
                       <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <span className="text-accent text-xs font-bold">{index + 1}</span>
                       </div>
-                      <span className="text-foreground-secondary">
-                        {localizeText(language, course.textPt, course.textEn)}
-                      </span>
+                      <span className="text-foreground-secondary">{course.textEn}</span>
                     </div>
                   ))}
                 </div>

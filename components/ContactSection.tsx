@@ -1,12 +1,9 @@
 "use client";
 
-import { useLanguage } from "@/lib/LanguageContext";
-import { getContentText, localizeText } from "@/lib/localize";
-import type {
-  ContactDetailData,
-  LocalizedText,
-  SocialLinkData,
-} from "@/lib/site-types";
+import type { ContactDetailData, LocalizedText, SocialLinkData } from "@/lib/site-types";
+
+const t = (content: Record<string, LocalizedText>, key: string) =>
+  content[key]?.en ?? "";
 
 const contactIcons = {
   email: (
@@ -38,34 +35,22 @@ interface ContactSectionProps {
   socialLinks: SocialLinkData[];
 }
 
-export default function ContactSection({
-  content,
-  contactDetails,
-  socialLinks,
-}: ContactSectionProps) {
-  const { language } = useLanguage();
-
+export default function ContactSection({ content, contactDetails, socialLinks }: ContactSectionProps) {
   return (
     <section id="contacto" className="py-24 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="section-kicker">
-            {getContentText(content, "contact.subtitle", language)}
-          </span>
+          <span className="section-kicker">{t(content, "contact.subtitle")}</span>
           <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
-            {getContentText(content, "contact.title", language)}
+            {t(content, "contact.title")}
           </h2>
           <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
         </div>
 
         <div className="max-w-2xl mx-auto bg-card/70 border border-border/70 rounded-[2rem] p-8 md:p-10 shadow-[0_20px_45px_rgba(85,65,39,0.12)]">
           <div className="text-center mb-8">
-            <h3 className="text-xl font-semibold mb-4">
-              {getContentText(content, "contact.getInTouch", language)}
-            </h3>
-            <p className="text-foreground-secondary leading-relaxed">
-              {getContentText(content, "contact.description", language)}
-            </p>
+            <h3 className="text-xl font-semibold mb-4">{t(content, "contact.getInTouch")}</h3>
+            <p className="text-foreground-secondary leading-relaxed">{t(content, "contact.description")}</p>
           </div>
 
           <div className="space-y-4">
@@ -73,31 +58,21 @@ export default function ContactSection({
               const isLink = Boolean(item.href);
               const Component = isLink ? "a" : "div";
               const linkProps = isLink
-                ? {
-                    href: item.href ?? undefined,
-                    target: item.type === "website" ? "_blank" : undefined,
-                    rel: item.type === "website" ? "noopener noreferrer" : undefined,
-                  }
+                ? { href: item.href ?? undefined, target: item.type === "website" ? "_blank" : undefined, rel: item.type === "website" ? "noopener noreferrer" : undefined }
                 : {};
 
               return (
                 <Component
                   key={item.type}
                   {...linkProps}
-                  className={`flex items-center gap-4 p-4 rounded-2xl bg-background/55 border border-border/70 ${
-                    isLink ? "hover:border-accent transition-all duration-300 group" : ""
-                  }`}
+                  className={`flex items-center gap-4 p-4 rounded-2xl bg-background/55 border border-border/70 ${isLink ? "hover:border-accent transition-all duration-300 group" : ""}`}
                 >
                   <div className={`w-12 h-12 rounded-xl bg-accent-muted flex items-center justify-center ${isLink ? "group-hover:bg-accent transition-colors" : ""}`}>
                     {contactIcons[item.type as keyof typeof contactIcons]}
                   </div>
                   <div>
-                    <p className="text-foreground-muted text-sm">
-                      {getContentText(content, `contact.${item.type}`, language)}
-                    </p>
-                    <p className="text-foreground font-medium">
-                      {localizeText(language, item.valuePt, item.valueEn)}
-                    </p>
+                    <p className="text-foreground-muted text-sm">{t(content, `contact.${item.type}`)}</p>
+                    <p className="text-foreground font-medium">{item.valueEn}</p>
                   </div>
                 </Component>
               );
@@ -105,9 +80,7 @@ export default function ContactSection({
           </div>
 
           <div className="mt-8 text-center">
-            <h4 className="font-semibold mb-4">
-              {getContentText(content, "contact.findMe", language)}
-            </h4>
+            <h4 className="font-semibold mb-4">{t(content, "contact.findMe")}</h4>
             <div className="flex gap-3 justify-center">
               {socialLinks.filter((link) => link.visibleInContact).slice(0, 2).map((link) => (
                 <a
