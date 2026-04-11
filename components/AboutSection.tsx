@@ -24,79 +24,81 @@ export default function AboutSection({
   educationEntry,
 }: AboutSectionProps) {
   return (
-    <section id="sobre" className="py-24 relative">
-      <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="section-kicker">{t(content, "about.subtitle")}</span>
-            <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
+    <section id="sobre" className="py-24 md:py-32">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-20">
+          {/* Left column */}
+          <div className="md:col-span-5">
+            <span className="section-label mb-6 block">{t(content, "about.subtitle")}</span>
+            <h2 className="font-display italic text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6 leading-[1.05]">
               {t(content, "about.title")}
             </h2>
-            <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
-          </div>
+            <div className="w-12 h-[2px] bg-accent mb-8" />
 
-          <div className="grid md:grid-cols-5 gap-8 items-start">
-            <div className="md:col-span-3 space-y-6">
-              <p className="text-lg text-foreground-secondary leading-relaxed bg-card/70 border border-border/70 rounded-3xl p-6">
-                {t(content, "about.p1")}
-              </p>
-              <p className="text-lg text-foreground-secondary leading-relaxed bg-card/70 border border-border/70 rounded-3xl p-6">
-                {t(content, "about.p2")}
-              </p>
-              <p className="text-lg text-foreground-secondary leading-relaxed bg-card/70 border border-border/70 rounded-3xl p-6">
-                {t(content, "about.p3")}
-              </p>
-
-              <div className="pt-6 grid grid-cols-2 gap-4">
-                <div className="p-5 rounded-2xl bg-card border border-border/70 hover-card">
-                  <div className="text-2xl font-bold text-accent">{profile.yearsOfProgramming}+</div>
-                  <div className="text-sm text-foreground-muted">{t(content, "about.yearsOfProgramming")}</div>
-                </div>
-                <div className="p-5 rounded-2xl bg-card border border-border/70 hover-card">
-                  <div className="text-2xl font-bold text-accent">{profile.projectsDeveloped}+</div>
-                  <div className="text-sm text-foreground-muted">{t(content, "about.projectsDeveloped")}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="md:col-span-2 space-y-4">
-              <div className="p-6 rounded-3xl bg-card border border-border/70 hover-card">
-                <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+            {/* Info cards */}
+            <div className="space-y-4">
+              <div className="p-5 rounded-2xl bg-bg-card border border-border hover-card">
+                <div className="text-xs text-text-muted uppercase tracking-widest mb-1.5 font-medium">
                   {t(content, "about.location")}
-                </h3>
-                <p className="text-foreground-secondary">{profile.locationEn}</p>
+                </div>
+                <div className="text-text font-medium">{profile.locationEn}</div>
               </div>
 
-              <div className="p-6 rounded-3xl bg-card border border-border/70 hover-card">
-                <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                  </svg>
+              <div className="p-5 rounded-2xl bg-bg-card border border-border hover-card">
+                <div className="text-xs text-text-muted uppercase tracking-widest mb-2 font-medium">
                   {t(content, "about.languages")}
-                </h3>
-                <div className="space-y-2">
+                </div>
+                <div className="space-y-1.5">
                   {spokenLanguages.map((lang) => (
                     <div key={lang.id} className="flex justify-between items-center">
-                      <span className="text-foreground-secondary">{lang.nameEn}</span>
-                      <span className="text-accent text-sm font-medium">{lang.levelEn}</span>
+                      <span className="text-text-secondary text-sm">{lang.nameEn}</span>
+                      <span className="text-accent text-xs font-semibold">{lang.levelEn}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="p-6 rounded-3xl bg-card border border-border/70 hover-card">
-                <h3 className="font-semibold mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+              <div className="p-5 rounded-2xl bg-bg-card border border-border hover-card">
+                <div className="text-xs text-text-muted uppercase tracking-widest mb-1.5 font-medium">
                   {t(content, "about.education")}
-                </h3>
-                <p className="text-foreground-secondary">{educationEntry.degreeEn}</p>
-                <p className="text-foreground-muted text-sm">{educationEntry.institution}</p>
+                </div>
+                <div className="text-text font-medium text-sm">{educationEntry.degreeEn}</div>
+                <div className="text-text-muted text-xs mt-0.5">{educationEntry.institution}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right column - prose */}
+          <div className="md:col-span-7 flex flex-col justify-center">
+            <div className="space-y-6">
+              <p className="text-lg md:text-xl text-text-secondary leading-[1.75]">
+                {t(content, "about.p1")}
+              </p>
+              <p className="text-lg md:text-xl text-text-secondary leading-[1.75]">
+                {t(content, "about.p2")}
+              </p>
+              <p className="text-lg md:text-xl text-text-secondary leading-[1.75]">
+                {t(content, "about.p3")}
+              </p>
+            </div>
+
+            {/* Mini stats */}
+            <div className="flex gap-10 mt-12 pt-8 border-t border-border">
+              <div>
+                <div className="font-display italic text-3xl text-accent">
+                  {profile.yearsOfProgramming}+
+                </div>
+                <div className="text-xs text-text-muted mt-1 uppercase tracking-widest font-medium">
+                  {t(content, "about.yearsOfProgramming")}
+                </div>
+              </div>
+              <div>
+                <div className="font-display italic text-3xl text-accent">
+                  {profile.projectsDeveloped}+
+                </div>
+                <div className="text-xs text-text-muted mt-1 uppercase tracking-widest font-medium">
+                  {t(content, "about.projectsDeveloped")}
+                </div>
               </div>
             </div>
           </div>

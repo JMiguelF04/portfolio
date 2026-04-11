@@ -13,80 +13,87 @@ interface ExperienceSectionProps {
 
 export default function ExperienceSection({ content, experiences, profile }: ExperienceSectionProps) {
   return (
-    <section id="experiencia" className="py-24 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="section-kicker">{t(content, "experience.subtitle")}</span>
-          <h2 className="text-3xl md:text-5xl font-semibold mt-4 mb-4 tracking-tight">
-            {t(content, "experience.title")}
-          </h2>
-          <div className="w-16 h-0.5 bg-accent mx-auto rounded-full opacity-60" />
-        </div>
+    <section id="experiencia" className="py-24 md:py-32">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-20">
+          {/* Left: sticky header */}
+          <div className="md:col-span-4">
+            <div className="md:sticky md:top-32">
+              <span className="section-label mb-4 block">{t(content, "experience.subtitle")}</span>
+              <h2 className="font-display italic text-4xl md:text-5xl tracking-tight mb-6">
+                {t(content, "experience.title")}
+              </h2>
+              <div className="w-12 h-[2px] bg-accent mb-8" />
 
-        <div className="max-w-3xl mx-auto">
-          <div className="relative">
-            <div className="absolute left-5 top-0 bottom-0 w-px bg-border/80" />
+              <p className="text-text-muted text-sm mb-4">
+                {t(content, "experience.cvQuestion")}
+              </p>
+              <a
+                href={profile.cvFilePath}
+                target="_blank"
+                className="inline-flex items-center gap-2 text-accent font-medium text-sm group"
+              >
+                {t(content, "experience.cvEn")}
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 17L17 7M17 7H7M17 7V17" />
+                </svg>
+              </a>
+            </div>
+          </div>
 
-            <div className="space-y-8">
-              {experiences.map((experience) => (
-                <div key={experience.id} className="relative pl-16">
-                  <div className="absolute left-[15px] top-8 w-[11px] h-[11px] rounded-full bg-accent border-2 border-background z-10">
+          {/* Right: timeline */}
+          <div className="md:col-span-8">
+            <div className="space-y-0">
+              {experiences.map((experience, i) => (
+                <div
+                  key={experience.id}
+                  className={`relative py-8 ${
+                    i < experiences.length - 1 ? "border-b border-border" : ""
+                  }`}
+                >
+                  {/* Period + current badge */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs text-text-muted tracking-widest uppercase font-medium">
+                      {experience.periodEn}
+                    </span>
                     {experience.current && (
-                      <div className="absolute inset-0 rounded-full bg-accent animate-ping opacity-50" />
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-green-muted text-green text-xs font-medium">
+                        <span className="w-1.5 h-1.5 bg-green rounded-full animate-pulse" />
+                        Current
+                      </span>
                     )}
                   </div>
 
-                  <div className="p-7 rounded-3xl bg-card border border-border/70 hover-card">
-                    <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                      <div>
-                        <h3 className="text-lg font-bold text-foreground">{experience.roleEn}</h3>
-                        <p className="text-accent font-medium text-sm">{experience.company}</p>
-                      </div>
-                      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-muted border border-accent/20 flex-shrink-0">
-                        <svg className="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span className="text-xs text-accent font-medium">{experience.periodEn}</span>
-                      </div>
-                    </div>
+                  <h3 className="text-xl font-semibold text-text mb-1">
+                    {experience.roleEn}
+                  </h3>
+                  <p className="text-accent font-medium text-sm mb-4">
+                    {experience.company}
+                  </p>
 
-                    <ul className="space-y-2.5 mb-5">
-                      {experience.bullets.map((bullet) => (
-                        <li key={bullet.id} className="flex gap-3 text-foreground-secondary text-sm">
-                          <svg className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          <span>{bullet.textEn}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <ul className="space-y-2 mb-5">
+                    {experience.bullets.map((bullet) => (
+                      <li key={bullet.id} className="flex gap-3 text-text-secondary text-sm leading-relaxed">
+                        <span className="text-accent mt-1.5 flex-shrink-0">&#8212;</span>
+                        <span>{bullet.textEn}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech) => (
-                        <span key={tech} className="px-3 py-1 text-xs rounded-full bg-background border border-border/80 text-foreground-secondary font-mono">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {experience.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-xs rounded-full border border-border text-text-muted font-medium"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-
-        <div className="text-center mt-14">
-          <p className="text-foreground-muted mb-4 text-sm">{t(content, "experience.cvQuestion")}</p>
-          <a
-            href={profile.cvFilePath}
-            target="_blank"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-accent/40 text-accent rounded-full hover:bg-accent hover:text-white hover:border-accent transition-all duration-300 font-medium text-sm"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            {t(content, "experience.cvEn")}
-          </a>
         </div>
       </div>
     </section>

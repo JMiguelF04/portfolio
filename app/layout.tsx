@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Sora, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { getSiteData } from "@/lib/site-data";
 
-const sora = Sora({
-  variable: "--font-sora",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,8 +33,6 @@ export async function generateMetadata(): Promise<Metadata> {
       "TypeScript",
       "React",
       "Portfolio",
-      "Prisma",
-      "PostgreSQL",
     ],
     authors: [{ name: siteData.profile.name }],
     icons: {
@@ -53,9 +52,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${sora.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${instrumentSerif.variable} ${dmSans.variable} antialiased`}
       >
         {children}
       </body>
