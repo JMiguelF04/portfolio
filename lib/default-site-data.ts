@@ -7,7 +7,7 @@ export const defaultSiteData: SiteData = {
     headlinePt: "Junior Developer",
     headlineEn: "Junior Developer",
     profileImagePath: "/Profile-Photo.png",
-    cvFilePath: "/CV_ENG.pdf",
+    cvFilePath: "/CV.pdf",
     locationPt: "Lisboa, Portugal",
     locationEn: "Lisbon, Portugal",
     website: "https://www.jmdaf.dev",
