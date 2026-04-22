@@ -82,7 +82,6 @@ export default function AboutSection({
               </p>
             </div>
 
-            {/* Mini stats */}
             <div className="flex gap-10 mt-12 pt-8 border-t border-border">
               <div>
                 <div className="font-display italic text-3xl text-accent">
